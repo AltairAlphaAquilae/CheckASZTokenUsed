@@ -1,0 +1,55 @@
+<div class="container">
+        <a href="/"><h1 class="title">My Ethereum</h1></a><br>
+        <nav class="panel">
+          <p class="panel-heading">
+            Balance
+          </p>
+          <div class="box">
+            <div class="field">
+                <label class="label">Ethereum Address</label>
+                <div class="control">
+                    <input class="input" type="text" id="wallet" placeholder="wallet address">
+                </div>
+            </div>
+          </div>
+           
+         </nav>
+        <p>Please enter the wallet address and press the button</p>
+        <input type="submit" class="button is-link" id="btn" value="Check" onclick="OnButtonClick();">
+        <br>
+        <br>
+        <br>
+         
+        <article class="message">
+        <div class="message-header">
+            <p>Balance</p>
+          </div>
+          <div class="message-body">
+            <div id="resArea"></div>
+             
+          </div>
+        </article>
+        <br>
+        <a href="" target="_blank">BLOCK Chain explore</a>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/web3/1.7.0-rc.0/web3.min.js"></script>
+    <script>
+        let resArea = document.getElementById('resArea');
+        let wallet = document.getElementById('wallet');
+ 
+        function OnButtonClick() {
+            main(); 
+             
+        }
+        async function main(){
+            var web3 = new Web3();
+            web3.setProvider(new web3.providers.HttpProvider('http://192.168.33.10:8545'));
+            web3.eth.getBalance(wallet.value).then((result, error) => {
+                const balance = web3.utils.fromWei(result, 'ether');
+                console.log(balance);
+                resArea.innerHTML = balance + " eth";
+            });
+             
+        }
+         
+    </script>
